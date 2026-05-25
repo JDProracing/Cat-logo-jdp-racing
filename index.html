@@ -1,0 +1,2464 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo Digital - Repuestos Motos & Motocross</title>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --negro: #0a0a0a;
+            --negro-claro: #1a1a1a;
+            --gris: #2a2a2a;
+            --gris-medio: #3a3a3a;
+            --naranja: #ff6600;
+            --naranja-claro: #ff8533;
+            --blanco: #ffffff;
+            --blanco-suave: #e0e0e0;
+            --rojo: #ff3333;
+            --verde: #00cc66;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--negro);
+            color: var(--blanco);
+            line-height: 1.6;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--negro) 0%, var(--negro-claro) 100%);
+            border-bottom: 3px solid var(--naranja);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(255, 102, 0, 0.2);
+        }
+
+        .header-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .logo { display: flex; align-items: center; gap: 12px; }
+        .logo-icon { font-size: 2.5rem; color: var(--naranja); }
+        .logo-text {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--blanco);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        .logo-text span { color: var(--naranja); }
+
+        .header-info { display: flex; gap: 25px; align-items: center; flex-wrap: wrap; }
+        .header-item { display: flex; align-items: center; gap: 8px; font-size: 0.9rem; color: var(--blanco-suave); }
+        .header-item i { color: var(--naranja); font-size: 1.1rem; }
+
+        .whatsapp-btn {
+            background: linear-gradient(135deg, #25d366, #128c7e);
+            color: var(--blanco);
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+        .whatsapp-btn:hover { transform: translateY(-2px); box-shadow: 0 5px 20px rgba(37, 211, 102, 0.4); }
+        .whatsapp-btn:nth-of-type(2):hover { box-shadow: 0 5px 20px rgba(18, 140, 126, 0.4); }
+        .btn-ubicacion { 
+            background: linear-gradient(135deg, #ea4335, #fbbc05) !important; 
+        }
+        .btn-ubicacion:hover { 
+            box-shadow: 0 5px 20px rgba(234, 67, 53, 0.4) !important; 
+        }
+
+        /* Hero */
+        .hero {
+            background: linear-gradient(135deg, var(--negro-claro) 0%, var(--gris) 100%);
+            padding: 60px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%; right: -10%;
+            width: 500px; height: 500px;
+            background: radial-gradient(circle, rgba(255, 102, 0, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        .hero h1 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 3rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
+        }
+        .hero h1 span { color: var(--naranja); }
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--blanco-suave);
+            max-width: 600px;
+            margin: 0 auto 30px;
+            position: relative;
+            z-index: 1;
+        }
+        .hero-stats { display: flex; justify-content: center; gap: 40px; margin-top: 30px; flex-wrap: wrap; position: relative; z-index: 1; }
+        .stat { text-align: center; }
+        .stat-number { font-family: 'Oswald', sans-serif; font-size: 2.5rem; font-weight: 700; color: var(--naranja); }
+        .stat-label { font-size: 0.9rem; color: var(--blanco-suave); text-transform: uppercase; letter-spacing: 1px; }
+
+        /* Controls */
+        .controls { background: var(--negro-claro); padding: 25px 20px; border-bottom: 1px solid var(--gris); }
+        .controls-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        .search-box { position: relative; flex: 1; min-width: 280px; max-width: 500px; }
+        .search-box input {
+            width: 100%;
+            padding: 14px 20px 14px 50px;
+            border: 2px solid var(--gris);
+            border-radius: 30px;
+            background: var(--negro);
+            color: var(--blanco);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        .search-box input:focus { outline: none; border-color: var(--naranja); box-shadow: 0 0 15px rgba(255, 102, 0, 0.2); }
+        .search-box i { position: absolute; left: 18px; top: 50%; transform: translateY(-50%); color: var(--naranja); font-size: 1.1rem; }
+        .filter-buttons { display: flex; gap: 10px; flex-wrap: wrap; }
+        .filter-btn {
+            padding: 10px 20px;
+            border: 2px solid var(--gris);
+            border-radius: 25px;
+            background: transparent;
+            color: var(--blanco-suave);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .filter-btn:hover, .filter-btn.active { background: var(--naranja); border-color: var(--naranja); color: var(--blanco); transform: translateY(-2px); }
+        .sort-select {
+            padding: 12px 20px;
+            border: 2px solid var(--gris);
+            border-radius: 25px;
+            background: var(--negro);
+            color: var(--blanco);
+            font-size: 0.9rem;
+            cursor: pointer;
+        }
+        .sort-select:focus { outline: none; border-color: var(--naranja); }
+
+        /* Products */
+        .products-section { max-width: 1400px; margin: 0 auto; padding: 40px 20px; }
+        .section-title {
+            font-family: 'Oswald', sans-serif;
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .section-title::after { content: ''; flex: 1; height: 2px; background: linear-gradient(90deg, var(--naranja), transparent); }
+
+        .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 25px; }
+        .product-card {
+            background: linear-gradient(145deg, var(--negro-claro), var(--gris));
+            border-radius: 15px;
+            overflow: hidden;
+            border: 1px solid var(--gris-medio);
+            transition: all 0.4s ease;
+            position: relative;
+        }
+        .product-card:hover { transform: translateY(-8px); border-color: var(--naranja); box-shadow: 0 15px 40px rgba(255, 102, 0, 0.15); }
+        .product-badge {
+            position: absolute;
+            top: 15px; left: 15px;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            z-index: 10;
+        }
+        .badge-stock { background: var(--verde); color: var(--blanco); }
+        .badge-limited { background: var(--naranja); color: var(--blanco); }
+        .badge-order { background: #3498db; color: var(--blanco); }
+        .product-image {
+            width: 100%; height: 220px;
+            object-fit: cover;
+            background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: var(--naranja);
+            position: relative;
+            overflow: hidden;
+        }
+        .product-image::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            height: 60px;
+            background: linear-gradient(transparent, var(--negro-claro));
+        }
+        .product-info { padding: 20px; }
+        .product-sku { font-size: 0.75rem; color: var(--naranja); font-weight: 600; letter-spacing: 1px; margin-bottom: 8px; }
+        .product-name { font-family: 'Oswald', sans-serif; font-size: 1.2rem; font-weight: 600; margin-bottom: 8px; line-height: 1.3; }
+        .product-brand { font-size: 0.85rem; color: var(--blanco-suave); margin-bottom: 12px; display: flex; align-items: center; gap: 5px; }
+        .product-brand i { color: var(--naranja); font-size: 0.8rem; }
+        .product-compat { background: var(--negro); border-radius: 8px; padding: 10px 12px; margin-bottom: 15px; border-left: 3px solid var(--naranja); }
+        .compat-title { font-size: 0.75rem; color: var(--naranja); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; }
+        .compat-list { font-size: 0.8rem; color: var(--blanco-suave); line-height: 1.5; }
+        .product-footer { display: flex; justify-content: space-between; align-items: center; padding-top: 15px; border-top: 1px solid var(--gris-medio); }
+        .product-price { font-family: 'Oswald', sans-serif; font-size: 1.5rem; font-weight: 700; color: var(--naranja); }
+        .product-price .currency { font-size: 0.9rem; color: var(--blanco-suave); }
+        .product-actions { display: flex; gap: 8px; }
+        .btn-icon { width: 40px; height: 40px; border-radius: 50%; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; font-size: 1rem; }
+        .btn-whatsapp { background: #25d366; color: var(--blanco); }
+        .btn-whatsapp:hover { transform: scale(1.1); box-shadow: 0 0 15px rgba(37, 211, 102, 0.4); }
+        .btn-details { background: var(--naranja); color: var(--blanco); }
+        .btn-details:hover { transform: scale(1.1); box-shadow: 0 0 15px rgba(255, 102, 0, 0.4); }
+
+        /* Pagination */
+        .pagination { display: flex; justify-content: center; gap: 10px; margin-top: 40px; padding-bottom: 40px; }
+        .page-btn {
+            width: 45px; height: 45px;
+            border-radius: 50%;
+            border: 2px solid var(--gris);
+            background: transparent;
+            color: var(--blanco);
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .page-btn:hover, .page-btn.active { background: var(--naranja); border-color: var(--naranja); transform: scale(1.1); }
+        .page-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+
+        /* Footer */
+        .footer { background: var(--negro-claro); border-top: 3px solid var(--naranja); padding: 50px 20px 30px; margin-top: 60px; }
+        .footer-container { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; }
+        .footer-section h3 { font-family: 'Oswald', sans-serif; font-size: 1.2rem; margin-bottom: 20px; color: var(--naranja); text-transform: uppercase; letter-spacing: 2px; }
+        .footer-section p, .footer-section a { color: var(--blanco-suave); text-decoration: none; line-height: 2; font-size: 0.95rem; transition: color 0.3s ease; }
+        .footer-section a:hover { color: var(--naranja); }
+        .footer-section i { color: var(--naranja); margin-right: 10px; width: 20px; }
+        .social-links { display: flex; gap: 15px; margin-top: 20px; flex-wrap: wrap; }
+        .social-links a { 
+            min-width: 120px; 
+            padding: 12px 20px; 
+            border-radius: 30px; 
+            background: var(--gris); 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            gap: 10px;
+            color: var(--blanco); 
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: all 0.3s ease; 
+            border: 2px solid transparent;
+        }
+        .social-links a i { font-size: 1.2rem; }
+        .social-links a:hover { 
+            transform: translateY(-3px); 
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        .social-links a.social-instagram { 
+            background: linear-gradient(135deg, #833ab4, #fd1d1d, #f77737); 
+            border-color: rgba(255,255,255,0.1);
+        }
+        .social-links a.social-instagram:hover { 
+            box-shadow: 0 5px 20px rgba(253, 29, 29, 0.4);
+        }
+        .social-links a.social-maps { 
+            background: linear-gradient(135deg, #ea4335, #fbbc05); 
+            border-color: rgba(255,255,255,0.1);
+        }
+        .social-links a.social-maps:hover { 
+            box-shadow: 0 5px 20px rgba(234, 67, 53, 0.4);
+        }
+        .social-label { font-size: 0.85rem; }
+        .footer-bottom { max-width: 1400px; margin: 30px auto 0; padding-top: 20px; border-top: 1px solid var(--gris); text-align: center; color: var(--blanco-suave); font-size: 0.85rem; }
+
+        /* Modal */
+        .modal-overlay { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.85); z-index: 2000; justify-content: center; align-items: center; padding: 20px; }
+        .modal-overlay.active { display: flex; }
+        .modal-content {
+            background: linear-gradient(145deg, var(--negro-claro), var(--gris));
+            border-radius: 20px;
+            max-width: 700px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            border: 2px solid var(--naranja);
+            position: relative;
+        }
+        .modal-close { position: absolute; top: 15px; right: 15px; width: 40px; height: 40px; border-radius: 50%; background: var(--naranja); border: none; color: var(--blanco); font-size: 1.2rem; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; }
+        .modal-close:hover { transform: rotate(90deg); background: var(--rojo); }
+        .modal-body { padding: 30px; }
+        .modal-image { width: 100%; height: 300px; background: linear-gradient(135deg, #1a1a1a, #2a2a2a); border-radius: 15px; display: flex; align-items: center; justify-content: center; font-size: 6rem; color: var(--naranja); margin-bottom: 25px; }
+        .modal-title { font-family: 'Oswald', sans-serif; font-size: 1.8rem; margin-bottom: 10px; }
+        .modal-sku { color: var(--naranja); font-weight: 600; margin-bottom: 20px; }
+        .modal-details { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 25px; }
+        .detail-item { background: var(--negro); padding: 15px; border-radius: 10px; border-left: 3px solid var(--naranja); }
+        .detail-label { font-size: 0.75rem; color: var(--naranja); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; }
+        .detail-value { font-size: 1rem; font-weight: 600; }
+        .modal-price { font-family: 'Oswald', sans-serif; font-size: 2.5rem; color: var(--naranja); margin-bottom: 20px; }
+        .modal-actions { display: flex; gap: 15px; flex-wrap: wrap; }
+        .btn-primary { flex: 1; min-width: 200px; padding: 15px 30px; border-radius: 30px; border: none; font-size: 1rem; font-weight: 600; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; justify-content: center; gap: 10px; text-decoration: none; }
+        .btn-whatsapp-lg { background: linear-gradient(135deg, #25d366, #128c7e); color: var(--blanco); }
+        .btn-whatsapp-lg:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(37, 211, 102, 0.3); }
+        .btn-secondary { background: transparent; border: 2px solid var(--naranja); color: var(--naranja); }
+        .btn-secondary:hover { background: var(--naranja); color: var(--blanco); }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2rem; }
+            .hero-stats { gap: 20px; }
+            .stat-number { font-size: 1.8rem; }
+            .products-grid { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
+            .header-container { flex-direction: column; text-align: center; }
+            .controls-container { flex-direction: column; align-items: stretch; }
+            .search-box { max-width: 100%; }
+            .filter-buttons { justify-content: center; }
+        }
+
+        /* Animations */
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .product-card { animation: fadeIn 0.5s ease forwards; }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--negro); }
+        ::-webkit-scrollbar-thumb { background: var(--naranja); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--naranja-claro); }
+
+        /* Search Suggestions */
+        .search-suggestions {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: var(--negro-claro);
+            border: 2px solid var(--gris);
+            border-top: none;
+            border-radius: 0 0 15px 15px;
+            max-height: 300px;
+            overflow-y: auto;
+            z-index: 100;
+            display: none;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        .search-suggestions.active { display: block; }
+        .suggestion-item {
+            padding: 12px 20px;
+            cursor: pointer;
+            border-bottom: 1px solid var(--gris);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.2s ease;
+        }
+        .suggestion-item:hover {
+            background: var(--gris);
+        }
+        .suggestion-item i {
+            color: var(--naranja);
+            font-size: 1rem;
+            width: 20px;
+        }
+        .suggestion-text {
+            flex: 1;
+        }
+        .suggestion-name {
+            font-size: 0.95rem;
+            color: var(--blanco);
+            font-weight: 500;
+        }
+        .suggestion-meta {
+            font-size: 0.75rem;
+            color: var(--blanco-suave);
+            margin-top: 2px;
+        }
+        .suggestion-sku {
+            background: var(--naranja);
+            color: var(--blanco);
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+        .suggestion-highlight {
+            color: var(--naranja);
+            font-weight: 700;
+        }
+        .suggestion-no-results {
+            padding: 20px;
+            text-align: center;
+            color: var(--blanco-suave);
+            font-size: 0.9rem;
+        }
+        .suggestion-no-results i {
+            font-size: 2rem;
+            color: var(--naranja);
+            margin-bottom: 10px;
+            display: block;
+        }
+        .search-box input:focus + .search-suggestions,
+        .search-suggestions:hover {
+            border-color: var(--naranja);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <div class="logo">
+                <i class="fas fa-motorcycle logo-icon"></i>
+                <div class="logo-text">JDP<span>Racing</span></div>
+            </div>
+            <div class="header-info">
+                <div class="header-item"><i class="fas fa-phone"></i><span>+58 412-8445708</span></div>
+                <div class="header-item"><i class="fas fa-envelope"></i><span>jdproracing@gmail.com</span></div>
+                <a href="https://wa.me/584128445708" class="whatsapp-btn" target="_blank">
+                    <i class="fab fa-whatsapp"></i><span>Consultar Stock</span>
+                </a>
+                <a href="https://wa.me/584149485912" class="whatsapp-btn" target="_blank" style="background: linear-gradient(135deg, #128c7e, #075e54);">
+                    <i class="fab fa-whatsapp"></i><span>Cotizar</span>
+                </a>
+                <a href="https://maps.app.goo.gl/VpBYuhJMbXB36Vqd7?g_st=iw" class="whatsapp-btn btn-ubicacion" target="_blank">
+                    <i class="fas fa-map-marker-alt"></i><span>Ubicación</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+        <h1>Catálogo Digital <span>2026</span></h1>
+        <p>Repuestos, accesorios y vestimenta para motos de calle y motocross. Compatibilidad garantizada con las principales marcas. Más de 120 productos disponibles.</p>
+        <div class="hero-stats">
+            <div class="stat"><div class="stat-number">119</div><div class="stat-label">Productos</div></div>
+            <div class="stat"><div class="stat-number">4</div><div class="stat-label">Categorías</div></div>
+            <div class="stat"><div class="stat-number">5</div><div class="stat-label">Marcas Moto</div></div>
+            <div class="stat"><div class="stat-number">24h</div><div class="stat-label">Despacho</div></div>
+        </div>
+    </section>
+
+    <!-- Controls -->
+    <section class="controls">
+        <div class="controls-container">
+            <div class="search-box" style="position: relative;">
+                <i class="fas fa-search"></i>
+                <input type="text" id="searchInput" placeholder="Buscar por nombre, SKU, marca o modelo de moto..." autocomplete="off">
+                <div id="searchSuggestions" class="search-suggestions"></div>
+            </div>
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-filter="all">Todos</button>
+                <button class="filter-btn" data-filter="Repuestos Motor">Repuestos</button>
+                <button class="filter-btn" data-filter="Motocross">Motocross</button>
+                <button class="filter-btn" data-filter="Accesorios">Accesorios</button>
+                <button class="filter-btn" data-filter="Vestimenta">Vestimenta</button>
+            </div>
+            <select class="sort-select" id="sortSelect">
+                <option value="default">Ordenar por</option>
+                <option value="price-asc">Precio: Menor a Mayor</option>
+                <option value="price-desc">Precio: Mayor a Menor</option>
+                <option value="name">Nombre A-Z</option>
+            </select>
+        </div>
+    </section>
+
+    <!-- Products -->
+    <section class="products-section">
+        <h2 class="section-title"><i class="fas fa-th-large"></i> Catálogo de Productos</h2>
+        <div class="products-grid" id="productsGrid"></div>
+        <div class="pagination" id="pagination"></div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3><i class="fas fa-motorcycle"></i> JDP Racing</h3>
+                <p>Especialistas en repuestos y accesorios para motos de calle y motocross. Valencia, Venezuela.</p>
+                <div class="social-links">
+                    <a href="https://instagram.com/jdpracing" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="https://maps.google.com/?q=Valencia,+Venezuela" target="_blank" title="Ubicación"><i class="fas fa-map-marker-alt"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Contacto</h3>
+                <p><a href="https://maps.google.com/?q=Valencia,+Venezuela" target="_blank"><i class="fas fa-map-marker-alt"></i> Valencia, Venezuela</a></p>
+                <p><i class="fas fa-phone"></i> +58 412-8445708</p>
+                <p><i class="fas fa-phone"></i> +58 414-9485912</p>
+                <p><i class="fas fa-envelope"></i> jdproracing@gmail.com</p>
+                <p><i class="fas fa-clock"></i> Lun-Sáb: 7:00am - 6:00pm</p>
+            </div>
+            <div class="footer-section">
+                <h3>Categorías</h3>
+                <p><a href="#"><i class="fas fa-cog"></i> Repuestos Motor</a></p>
+                <p><a href="#"><i class="fas fa-mountain"></i> Motocross</a></p>
+                <p><a href="#"><i class="fas fa-tools"></i> Accesorios</a></p>
+                <p><a href="#"><i class="fas fa-tshirt"></i> Vestimenta</a></p>
+            </div>
+            <div class="footer-section">
+                <h3>Servicios</h3>
+                <p><i class="fas fa-shipping-fast"></i> Envíos a nivel nacional</p>
+                <p><i class="fas fa-shield-alt"></i> Garantía de 30 días</p>
+                <p><i class="fas fa-credit-card"></i> Múltiples medios de pago</p>
+                <p><a href="https://wa.me/584128445708?text=Hola JDP Racing! Quiero cotizar instalación de repuestos." target="_blank"><i class="fas fa-wrench"></i> Instalación profesional</a></p>
+                <p><a href="https://wa.me/584128445708?text=Hola JDP Racing! Quiero agendar mantenimiento preventivo." target="_blank"><i class="fas fa-tools"></i> Mantenimiento preventivo</a></p>
+                <p><a href="https://wa.me/584128445708?text=Hola JDP Racing! Necesito asesoría técnica especializada." target="_blank"><i class="fas fa-user-cog"></i> Asesoría técnica especializada</a></p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 JDP Racing - Catálogo Digital. Todos los precios son referenciales. Consultar stock antes de comprar.</p>
+        </div>
+    </footer>
+
+    <!-- Modal -->
+    <div class="modal-overlay" id="productModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+            <div class="modal-body" id="modalBody"></div>
+        </div>
+    </div>
+
+<script>
+const products = [
+    {
+        id: 1,
+        sku: "JDP-001",
+        nombre: "Filtro de aire Yamaha WR/YZ",
+        categoria: "Repuestos Motor",
+        marca_repuesto: "Yamaha",
+        precio: 0,
+        stock: "Disponible",
+        compatibilidad: "WR, YZ 250/450 (2002-2012)",
+        icono: "fa-filter",
+        codigo: "KL115",
+        cantidad: 1
+    },
+    {
+        id: 2,
+        sku: "JDP-002",
+        nombre: "Filtro de aire Honda CRF",
+        categoria: "Repuestos Motor",
+        marca_repuesto: "Honda",
+        precio: 0,
+        stock: "Disponible",
+        compatibilidad: "CRF 250/450 (2002-2014)",
+        icono: "fa-filter",
+        codigo: "KL108",
+        cantidad: 2
+    },
+    {
+        id: 3,
+        sku: "JDP-003",
+        nombre: "Filtro de aire KTM",
+        categoria: "Repuestos Motor",
+        marca_repuesto: "KTM",
+        precio: 0,
+        stock: "Disponible",
+        compatibilidad: "150, 250, 350, 500 (2012-2017)",
+        icono: "fa-filter",
+        codigo: "KL110",
+        cantidad: 2
+    },
+    {
+        id: 4,
+        sku: "JDP-004",
+        nombre: "Filtro de aire Genérico YZ",
+        categoria: "Repuestos Motor",
+        marca_repuesto: "Genérico",
+        precio: 0,
+        stock: "Disponible",
+        compatibilidad: "YZ 125/250/450",
+        icono: "fa-filter",
+        codigo: "12160202107",
+        cantidad: 4
+    },
+    {
+        id: 5,
+        sku: "JDP-005",
+        nombre: "Filtro de aire KTM 250/350/525",
+        categoria: "Repuestos Motor",
+        marca_repuesto: "KTM",
+        precio: 0,
+        stock: "Disponible",
+        compatibilidad: "250, 350, 525 (2017-2020)",
+        icono: "fa-filter",
+        codigo: "6378",
+        cantidad: 2
+    },
+    {
+        id: 6,
+        sku: "JDP-006",
+        nombre: "Filtro de aire Yamaha YZ/WR",
+        categoria: "Repuestos Motor",
+        marca_repuesto: "Yamaha",
+        precio: 0,
+        stock: "Disponible",
+        compatibilidad: "YZ, WR 250/450 (2014-2019)",
+        icono: "fa-filter",
+        codigo: "8632",
+        cantidad: 3
+    },
+    {
+        id: 7,
+        sku: "JDP-007",
+        nombre: "Levas de croche/freno Yamaha",
+        categoria: "Repuestos Motor",
+        marca_repuesto: "Yamaha",
+        precio: 0,
+        stock: "Disponible",
+        compatibilidad: "WR, YZ 250/450 (2001-2015)",
+        icono: "fa-hand-paper",
+        codigo: "LS004",
+        cantidad: 2
+    },
+    {
+        id: 8,
+        sku: "JDP-008",
+        nombre: "Levas de croche/freno Honda CRF",
+        categoria: "Repuestos Motor",
+        marca_repuesto: "Honda",
+        precio: 0,
+        stock: "Disponible",
+        compatibilidad: "CRF 250/450 (2001-2015)",
+        icono: "fa-hand-paper",
+        codigo: "800216",
+        cantidad: 3
+    },
+    {
+        id: 9,
+        sku: "JDP-009",
+        nombre: "Levas de croche/freno Husqvarna",
+        categoria: "Repuestos Motor",
+        marca_repuesto: "Husqvarna",
+        precio: 0,
+        stock: "Disponible",
+        compatibilidad: "125, 250, 300, 400, 501 (2014-2024)",
+        icono: "fa-hand-paper",
+        codigo: "9550/9549",
+        cantidad: 3
+    },
+    {
+        id: 10,
+        sku: "JDP-010",
+        nombre: "Pata de cambio lateral KTM",
+        categoria: "Motocross",
+        marca_repuesto: "KTM",
+        precio: 0,
+        stock: "Disponible",
+        compatibilidad: "250, 350, 450 (2001-2022)",
+        icono: "fa-cog",
+        codigo: "65822",
+        cantidad: 4
+    },
+    {
+        id: 11,
+        sku: "JDP-011",
+        nombre: "Pastillas freno DELANTERAS KTM",
+        categoria: "Motocross",
+        marca_repuesto: "KTM",
+        precio: 0,
+        stock: "Disponible",
+        compatibilidad: "250, 300, 350, 400, 520 (2020)",
+        icono: "fa-stop-circle",
+        codigo: "027",
+        cantidad: 3
+    },
+    {
+        id: 12,
+        sku: "JDP-012",
+        nombre: "Pastillas freno TRASERAS KTM",
+        categoria: "Motocross",
+        marca_repuesto: "KTM",
+        precio: 0,
+        stock: "Disponible",
+        compatibilidad: "250, 300, 350, 400, 520 (2020)",
+        icono: "fa-stop-circle",
+        codigo: "028",
+        cantidad: 8
+    },
+    {
+        id: 13,
+        sku: "JDP-013",
+        nombre: "Pastillas freno DELANTERAS Yamaha",
+        categoria: "Motocross",
+        marca_repuesto: "Yamaha",
+        precio: 0,
+        stock: "Últimas unidades",
+        compatibilidad: "250, 450 (2008-2019)",
+        icono: "fa-stop-circle",
+        codigo: "005",
+        cantidad: 1
+    },
+    {
+        id: 14,
+        sku: "JDP-014",
+        nombre: "Pastillas freno TRASERAS Yamaha",
+        categoria: "Motocross",
+        marca_repuesto: "Yamaha",
+        precio: 0,
+        stock: "Disponible",
+        compatibilidad: "250, 450 (2008-2018)",
+        icono: "fa-stop-circle",
+        codigo: "008",
+        cantidad: 4
+    },
+    {
+        id: 15,
+        sku: "JDP-015",
+        nombre: "Pastillas freno TRASERAS Yamaha (98-04)",
+        categoria: "Motocross",
+        marca_repuesto: "Yamaha",
+        precio: 0,
+        stock: "Disponible",
+        compatibilidad: "250, 450 (1998-2004)",
+        icono: "fa-stop-circle",
+        codigo: "1618-I",
+        cantidad: 4
+    },
+    {
+        id: 16,
+        sku: "JDP-016",
+        nombre: "Pastillas freno DELANTERAS Yamaha (98-04)",
+        categoria: "Motocross",
+        marca_repuesto: "Yamaha",
+        precio: 0,
+        stock: "Disponible",
+        compatibilidad: "250, 450 (1998-2004)",
+        icono: "fa-stop-circle",
+        codigo: "1618-I",
+        cantidad: 2
+    },
+    {
+        id: 17,
+        sku: "JDP-017",
+        nombre: "Kit de bujes horquilla Husqvarna/KTM",
+        categoria: "Motocross",
+        marca_repuesto: "Husqvarna / KTM",
+        precio: 0,
+        stock: "Disponible",
+        compatibilidad: "250, 350, 450, 520 (2001-2022)",
+        icono: "fa-wrench",
+        codigo: "5",
+        cantidad: 5
+    },
+    {
+        id: 18,
+        sku: "JDP-018",
+        nombre: "Switch encendido/apagado",
+        categoria: "Accesorios",
+        marca_repuesto: "Universal",
+        precio: 0,
+        stock: "Disponible",
+        compatibilidad: "YZ, YH, WR, HKW",
+        icono: "fa-power-off",
+        codigo: "N/A",
+        cantidad: 5
+    },
+    {
+        id: 19,
+        sku: "JDP-019",
+        nombre: "Guía de cadena Honda 150",
+        categoria: "Motocross",
+        marca_repuesto: "Honda",
+        precio: 0,
+        stock: "Disponible",
+        compatibilidad: "150 (2008-2019)",
+        icono: "fa-link",
+        codigo: "46168/7621",
+        cantidad: 2
+    },
+    {
+        id: 20,
+        sku: "JDP-020",
+        nombre: "Bloque eje/cadena KTM",
+        categoria: "Repuestos Motor",
+        marca_repuesto: "KTM",
+        precio: 0,
+        stock: "Disponible",
+        compatibilidad: "125, 250, 350, 450, 530 (2008-2023)",
+        icono: "fa-cube",
+        codigo: "PAM3535/1WG3536",
+        cantidad: 3
+    },
+    {
+        id: 21,
+        sku: "JDP-021",
+        nombre: "Bloque eje/cadena Yamaha WR/YZ",
+        categoria: "Repuestos Motor",
+        marca_repuesto: "Yamaha",
+        precio: 0,
+        stock: "Disponible",
+        compatibilidad: "WR, YZ 250/450 (2002-2022)",
+        icono: "fa-cube",
+        codigo: "AZ6068/NE0780",
+        cantidad: 6
+    },
+    {
+        id: 22,
+        sku: "JDP-022",
+        nombre: "Bloque eje/cadena Honda",
+        categoria: "Repuestos Motor",
+        marca_repuesto: "Honda",
+        precio: 0,
+        stock: "Disponible",
+        compatibilidad: "250, 450 (2008-2022)",
+        icono: "fa-cube",
+        codigo: "R3611",
+        cantidad: 2
+    },
+    {
+        id: 23,
+        sku: "JDP-023",
+        nombre: "Válvulas purgadoras KTM",
+        categoria: "Repuestos Motor",
+        marca_repuesto: "KTM",
+        precio: 0,
+        stock: "Disponible",
+        compatibilidad: "125-530 (2008-2015)",
+        icono: "fa-tint",
+        codigo: "7760",
+        cantidad: 6
+    },
+    {
+        id: 24,
+        sku: "JDP-024",
+        nombre: "Pata de cambio Suzuki RMZ",
+        categoria: "Motocross",
+        marca_repuesto: "Suzuki",
+        precio: 0,
+        stock: "Disponible",
+        compatibilidad: "RMZ 125-450 (2008-2015)",
+        icono: "fa-cog",
+        codigo: "2669",
+        cantidad: 3
+    },
+    {
+        id: 25,
+        sku: "JDP-025",
+        nombre: "Pata de cambio Yamaha",
+        categoria: "Motocross",
+        marca_repuesto: "Yamaha",
+        precio: 0,
+        stock: "Últimas unidades",
+        compatibilidad: "125-450 (2008-2015)",
+        icono: "fa-cog",
+        codigo: "A7209",
+        cantidad: 1
+    },
+    {
+        id: 26,
+        sku: "JDP-026",
+        nombre: "Pata de cambio Honda",
+        categoria: "Motocross",
+        marca_repuesto: "Honda",
+        precio: 0,
+        stock: "Últimas unidades",
+        compatibilidad: "125-450 (2008-2015)",
+        icono: "fa-cog",
+        codigo: "7108",
+        cantidad: 1
+    },
+    {
+        id: 27,
+        sku: "JDP-027",
+        nombre: "Pedal de freno Yamaha",
+        categoria: "Motocross",
+        marca_repuesto: "Yamaha",
+        precio: 0,
+        stock: "Últimas unidades",
+        compatibilidad: "125-450 (2008-2015)",
+        icono: "fa-shoe-prints",
+        codigo: "AZ303",
+        cantidad: 1
+    },
+    {
+        id: 28,
+        sku: "JDP-028",
+        nombre: "Pedal de freno Honda",
+        categoria: "Motocross",
+        marca_repuesto: "Honda",
+        precio: 0,
+        stock: "Últimas unidades",
+        compatibilidad: "125-450 (2008-2015)",
+        icono: "fa-shoe-prints",
+        codigo: "R205",
+        cantidad: 1
+    },
+    {
+        id: 29,
+        sku: "JDP-029",
+        nombre: "Guía de cadena KTM",
+        categoria: "Motocross",
+        marca_repuesto: "KTM",
+        precio: 0,
+        stock: "Disponible",
+        compatibilidad: "125, 250, 300, 350, 500 (2014-2024)",
+        icono: "fa-link",
+        codigo: "EXDLQKTD2",
+        cantidad: 5
+    },
+    {
+        id: 30,
+        sku: "JDP-030",
+        nombre: "Guía de cadena Yamaha WR/YZ",
+        categoria: "Motocross",
+        marca_repuesto: "Yamaha",
+        precio: 0,
+        stock: "Disponible",
+        compatibilidad: "WR, YZ 250/450 (2002-2015)",
+        icono: "fa-link",
+        codigo: "7658/7763/7762",
+        cantidad: 11
+    },
+    {
+        id: 31,
+        sku: "JDP-031",
+        nombre: "Guía de cadena Honda CRF",
+        categoria: "Motocross",
+        marca_repuesto: "Honda",
+        precio: 0,
+        stock: "Disponible",
+        compatibilidad: "CRF (varios modelos)",
+        icono: "fa-link",
+        codigo: "N/A",
+        cantidad: 11
+    },
+    {
+        id: 32,
+        sku: "JDP-032",
+        nombre: "Guía de cadena Suzuki",
+        categoria: "Motocross",
+        marca_repuesto: "Suzuki",
+        precio: 0,
+        stock: "Disponible",
+        compatibilidad: "Varios modelos",
+        icono: "fa-link",
+        codigo: "N/A",
+        cantidad: 11
+    },
+    {
+        id: 33,
+        sku: "JDP-033",
+        nombre: "Guía de cadena Kawasaki",
+        categoria: "Motocross",
+        marca_repuesto: "Kawasaki",
+        precio: 0,
+        stock: "Disponible",
+        compatibilidad: "Varios modelos",
+        icono: "fa-link",
+        codigo: "N/A",
+        cantidad: 11
+    },
+    {
+        id: 34,
+        sku: "JDP-034",
+        nombre: "Guía de cadena Honda CRF 150/230",
+        categoria: "Motocross",
+        marca_repuesto: "Honda",
+        precio: 0,
+        stock: "Disponible",
+        compatibilidad: "CRF 150, 230 (2002-2014)",
+        icono: "fa-link",
+        codigo: "0916",
+        cantidad: 3
+    },
+    {
+        id: 35,
+        sku: "JDP-035",
+        nombre: "Guía de cadena Yamaha YZ (Original Usada)",
+        categoria: "Motocross",
+        marca_repuesto: "Yamaha",
+        precio: 0,
+        stock: "Últimas unidades",
+        compatibilidad: "YZ",
+        icono: "fa-link",
+        codigo: "N/A",
+        cantidad: 1
+    },
+    {
+        id: 36,
+        sku: "JDP-036",
+        nombre: "Protector de escape",
+        categoria: "Accesorios",
+        marca_repuesto: "Yamaha/Honda/KTM",
+        precio: 0,
+        stock: "Disponible",
+        compatibilidad: "Todos cilindrajes (2002-2005)",
+        icono: "fa-shield-alt",
+        codigo: "N/A",
+        cantidad: 4
+    },
+    {
+        id: 37,
+        sku: "JDP-037",
+        nombre: "Kit completo guía cadena KTM",
+        categoria: "Motocross",
+        marca_repuesto: "KTM",
+        precio: 0,
+        stock: "Disponible",
+        compatibilidad: "Universal KTM (2008-2020)",
+        icono: "fa-link",
+        codigo: "N/A",
+        cantidad: 2
+    },
+    {
+        id: 38,
+        sku: "JDP-038",
+        nombre: "Gomas horquilla Suzuki RMZ",
+        categoria: "Motocross",
+        marca_repuesto: "Suzuki",
+        precio: 0,
+        stock: "Disponible",
+        compatibilidad: "RMZ 250/450 (2005-2009)",
+        icono: "fa-arrows-alt-v",
+        codigo: "7724",
+        cantidad: 4
+    },
+    {
+        id: 39,
+        sku: "JDP-039",
+        nombre: "Gomas horquilla Suzuki RMZ 250",
+        categoria: "Motocross",
+        marca_repuesto: "Suzuki",
+        precio: 0,
+        stock: "Disponible",
+        compatibilidad: "RMZ 250 (2012-2025)",
+        icono: "fa-arrows-alt-v",
+        codigo: "N/A",
+        cantidad: 2
+    },
+    {
+        id: 40,
+        sku: "JDP-040",
+        nombre: "Goma guía horquilla Honda XR",
+        categoria: "Motocross",
+        marca_repuesto: "Honda",
+        precio: 0,
+        stock: "Disponible",
+        compatibilidad: "XR 250 (1991-2004)",
+        icono: "fa-arrows-alt-v",
+        codigo: "2101",
+        cantidad: 2
+    },
+    {
+        id: 41,
+        sku: "JDP-041",
+        nombre: "Goma guía horquilla Yamaha WR/YZ",
+        categoria: "Motocross",
+        marca_repuesto: "Yamaha",
+        precio: 0,
+        stock: "Disponible",
+        compatibilidad: "WR, YZ 250/450 (2002-2018)",
+        icono: "fa-arrows-alt-v",
+        codigo: "7940/0909",
+        cantidad: 4
+    },
+    {
+        id: 42,
+        sku: "JDP-042",
+        nombre: "Goma guía horquilla Honda CRF",
+        categoria: "Motocross",
+        marca_repuesto: "Honda",
+        precio: 0,
+        stock: "Últimas unidades",
+        compatibilidad: "CRF 450 (2004-2018)",
+        icono: "fa-arrows-alt-v",
+        codigo: "N/A",
+        cantidad: 1
+    },
+    {
+        id: 43,
+        sku: "JDP-043",
+        nombre: "Rodillos de cadena",
+        categoria: "Motocross",
+        marca_repuesto: "Universal",
+        precio: 0,
+        stock: "Disponible",
+        compatibilidad: "Yamaha/Suzuki/KTM/Honda/Husqvarna (2001-2022)",
+        icono: "fa-circle",
+        codigo: "87",
+        cantidad: 7
+    },
+    {
+        id: 44,
+        sku: "JDP-044",
+        nombre: "Careta KTM",
+        categoria: "Vestimenta",
+        marca_repuesto: "KTM",
+        precio: 0,
+        stock: "Últimas unidades",
+        compatibilidad: "250, 450",
+        icono: "fa-mask",
+        codigo: "N/A",
+        cantidad: 1
+    },
+    {
+        id: 45,
+        sku: "JDP-045",
+        nombre: "Careta Yamaha WR/YZ",
+        categoria: "Vestimenta",
+        marca_repuesto: "Yamaha",
+        precio: 0,
+        stock: "Disponible",
+        compatibilidad: "WR, YZ 250/450 (2007-2012)",
+        icono: "fa-mask",
+        codigo: "N/A",
+        cantidad: 4
+    },
+    {
+        id: 46,
+        sku: "JDP-046",
+        nombre: "Retén de barras Yamaha",
+        categoria: "Motocross",
+        marca_repuesto: "Yamaha",
+        precio: 0,
+        stock: "Disponible",
+        compatibilidad: "WR, YZ 250/450 (48x58x9.5mm)",
+        icono: "fa-compress",
+        codigo: "48x58x9.5",
+        cantidad: 4
+    },
+    {
+        id: 47,
+        sku: "JDP-047",
+        nombre: "Retén de barras Honda CRF",
+        categoria: "Motocross",
+        marca_repuesto: "Honda",
+        precio: 0,
+        stock: "Disponible",
+        compatibilidad: "CRF 250/450 (47x58x15mm)",
+        icono: "fa-compress",
+        codigo: "47x58x15",
+        cantidad: 5
+    },
+    {
+        id: 48,
+        sku: "JDP-048",
+        nombre: "Rodamientos dirección Yamaha",
+        categoria: "Motocross",
+        marca_repuesto: "Yamaha",
+        precio: 0,
+        stock: "Disponible",
+        compatibilidad: "WR 250/450 (21x27x15mm)",
+        icono: "fa-bullseye",
+        codigo: "21x27x15",
+        cantidad: 5
+    },
+    {
+        id: 49,
+        sku: "JDP-049",
+        nombre: "Aro de fuego escape Yamaha",
+        categoria: "Repuestos Motor",
+        marca_repuesto: "Yamaha",
+        precio: 0,
+        stock: "Disponible",
+        compatibilidad: "Todos cilindrajes (35mm)",
+        icono: "fa-fire",
+        codigo: "35mm",
+        cantidad: 2
+    },
+    {
+        id: 50,
+        sku: "JDP-050",
+        nombre: "Corona universal careta",
+        categoria: "Vestimenta",
+        marca_repuesto: "Universal",
+        precio: 0,
+        stock: "Disponible",
+        compatibilidad: "Todos cilindrajes",
+        icono: "fa-circle-notch",
+        codigo: "N/A",
+        cantidad: 5
+    },
+    {
+        id: 51,
+        sku: "JDP-051",
+        nombre: "Tapa piñón Suzuki/Yamaha WR",
+        categoria: "Motocross",
+        marca_repuesto: "Suzuki / Yamaha",
+        precio: 0,
+        stock: "Últimas unidades",
+        compatibilidad: "WR 250 (2001-2016)",
+        icono: "fa-gear",
+        codigo: "0102",
+        cantidad: 1
+    },
+    {
+        id: 52,
+        sku: "JDP-052",
+        nombre: "Arranque de motor Honda CRF",
+        categoria: "Repuestos Motor",
+        marca_repuesto: "Honda",
+        precio: 0,
+        stock: "Últimas unidades",
+        compatibilidad: "CRF 250/450 (2004-2017)",
+        icono: "fa-bolt",
+        codigo: "N/A",
+        cantidad: 1
+    },
+    {
+        id: 53,
+        sku: "JDP-053",
+        nombre: "Llave de gasolina Suzuki",
+        categoria: "Repuestos Motor",
+        marca_repuesto: "Suzuki",
+        precio: 0,
+        stock: "Últimas unidades",
+        compatibilidad: "Todos modelos 250",
+        icono: "fa-key",
+        codigo: "6981",
+        cantidad: 1
+    },
+    {
+        id: 54,
+        sku: "JDP-054",
+        nombre: "Guaya de acelerador Honda CRF",
+        categoria: "Repuestos Motor",
+        marca_repuesto: "Honda",
+        precio: 0,
+        stock: "Últimas unidades",
+        compatibilidad: "CRF 250/450 (2004-2018)",
+        icono: "fa-tachometer-alt",
+        codigo: "0005",
+        cantidad: 1
+    },
+    {
+        id: 55,
+        sku: "JDP-055",
+        nombre: "Guaya de croche Yamaha YZ",
+        categoria: "Repuestos Motor",
+        marca_repuesto: "Yamaha",
+        precio: 0,
+        stock: "Últimas unidades",
+        compatibilidad: "YZ 250 (2004-2018)",
+        icono: "fa-hand-paper",
+        codigo: "0414",
+        cantidad: 1
+    },
+    {
+        id: 56,
+        sku: "JDP-056",
+        nombre: "Regulador de voltaje Suzuki RMZ",
+        categoria: "Repuestos Motor",
+        marca_repuesto: "Suzuki",
+        precio: 0,
+        stock: "Últimas unidades",
+        compatibilidad: "RMZ 250 (2010-2018)",
+        icono: "fa-bolt",
+        codigo: "RR131",
+        cantidad: 1
+    },
+    {
+        id: 57,
+        sku: "JDP-057",
+        nombre: "Tapa de tanque Honda XR/CRM",
+        categoria: "Repuestos Motor",
+        marca_repuesto: "Honda",
+        precio: 0,
+        stock: "Últimas unidades",
+        compatibilidad: "XR Baja, CRM 250 (1997-2004)",
+        icono: "fa-gas-pump",
+        codigo: "N/A",
+        cantidad: 1
+    },
+    {
+        id: 58,
+        sku: "JDP-058",
+        nombre: "Puños universales volante",
+        categoria: "Accesorios",
+        marca_repuesto: "Universal",
+        precio: 0,
+        stock: "Disponible",
+        compatibilidad: "Todos modelos (Gris, Naranja, Rojo)",
+        icono: "fa-hand-rock",
+        codigo: "N/A",
+        cantidad: 4
+    },
+    {
+        id: 59,
+        sku: "JDP-059",
+        nombre: "Tiras de amarre asiento",
+        categoria: "Accesorios",
+        marca_repuesto: "Universal",
+        precio: 0,
+        stock: "Disponible",
+        compatibilidad: "Todos modelos (Rojo, Negro)",
+        icono: "fa-chair",
+        codigo: "N/A",
+        cantidad: 4
+    },
+    {
+        id: 60,
+        sku: "JDP-060",
+        nombre: "Tiras de rescate asiento WR/CRF",
+        categoria: "Accesorios",
+        marca_repuesto: "Yamaha / Honda",
+        precio: 0,
+        stock: "Disponible",
+        compatibilidad: "WR, CRF 250/450 (Negro, Azul, Rojo)",
+        icono: "fa-chair",
+        codigo: "N/A",
+        cantidad: 4
+    },
+    {
+        id: 61,
+        sku: "JDP-061",
+        nombre: "Válvulas de vacío tanque universal",
+        categoria: "Repuestos Motor",
+        marca_repuesto: "Universal",
+        precio: 0,
+        stock: "Disponible",
+        compatibilidad: "Todos modelos (Azul, Rojo, Dorado, Negro)",
+        icono: "fa-tint",
+        codigo: "N/A",
+        cantidad: 7
+    },
+    {
+        id: 62,
+        sku: "JDP-062",
+        nombre: "Retenes originales Yamaha",
+        categoria: "Motocross",
+        marca_repuesto: "Yamaha",
+        precio: 0,
+        stock: "Disponible",
+        compatibilidad: "Varios modelos",
+        icono: "fa-compress",
+        codigo: "3AY-F3145-00",
+        cantidad: 2
+    },
+    {
+        id: 63,
+        sku: "JDP-063",
+        nombre: "Sellos de recorrido suspensión",
+        categoria: "Motocross",
+        marca_repuesto: "Universal",
+        precio: 0,
+        stock: "Disponible",
+        compatibilidad: "Todos modelos (varios colores)",
+        icono: "fa-arrows-alt-v",
+        codigo: "12000043744849385",
+        cantidad: 13
+    },
+    {
+        id: 64,
+        sku: "JDP-064",
+        nombre: "Diafragma inyector/carburador",
+        categoria: "Repuestos Motor",
+        marca_repuesto: "Universal",
+        precio: 0,
+        stock: "Disponible",
+        compatibilidad: "Todos modelos",
+        icono: "fa-spray-can",
+        codigo: "FSR-1DFMP",
+        cantidad: 4
+    },
+    {
+        id: 65,
+        sku: "JDP-065",
+        nombre: "Retén bomba de agua CRF",
+        categoria: "Repuestos Motor",
+        marca_repuesto: "Honda",
+        precio: 0,
+        stock: "Disponible",
+        compatibilidad: "CRF 250/450",
+        icono: "fa-tint",
+        codigo: "N/A",
+        cantidad: 4
+    },
+    {
+        id: 66,
+        sku: "JDP-066",
+        nombre: "Propela bomba de agua CRF",
+        categoria: "Repuestos Motor",
+        marca_repuesto: "Honda",
+        precio: 0,
+        stock: "Últimas unidades",
+        compatibilidad: "CRF 250",
+        icono: "fa-fan",
+        codigo: "N/A",
+        cantidad: 1
+    },
+    {
+        id: 67,
+        sku: "JDP-067",
+        nombre: "Aguja entrada de aire",
+        categoria: "Repuestos Motor",
+        marca_repuesto: "Universal",
+        precio: 0,
+        stock: "Disponible",
+        compatibilidad: "Todos modelos (Aluminio)",
+        icono: "fa-wind",
+        codigo: "N/A",
+        cantidad: 4
+    },
+    {
+        id: 68,
+        sku: "JDP-068",
+        nombre: "Válvula purga",
+        categoria: "Repuestos Motor",
+        marca_repuesto: "Universal",
+        precio: 0,
+        stock: "Disponible",
+        compatibilidad: "Todos modelos",
+        icono: "fa-tint",
+        codigo: "3251",
+        cantidad: 3
+    },
+    {
+        id: 69,
+        sku: "JDP-069",
+        nombre: "Manguera agua radiador KTM Racing",
+        categoria: "Repuestos Motor",
+        marca_repuesto: "KTM",
+        precio: 0,
+        stock: "Últimas unidades",
+        compatibilidad: "Racing 2024",
+        icono: "fa-temperature-high",
+        codigo: "8612",
+        cantidad: 1
+    },
+    {
+        id: 70,
+        sku: "JDP-070",
+        nombre: "Bobina de encendido Honda CRF",
+        categoria: "Repuestos Motor",
+        marca_repuesto: "Honda",
+        precio: 0,
+        stock: "Disponible",
+        compatibilidad: "CRF 250/450 (2004-2014)",
+        icono: "fa-bolt",
+        codigo: "363",
+        cantidad: 3
+    },
+    {
+        id: 71,
+        sku: "JDP-071",
+        nombre: "Bobina de encendido Yamaha YZ/WR",
+        categoria: "Repuestos Motor",
+        marca_repuesto: "Yamaha",
+        precio: 0,
+        stock: "Disponible",
+        compatibilidad: "YZ, WR 250/450 (2004-2014)",
+        icono: "fa-bolt",
+        codigo: "9654",
+        cantidad: 2
+    },
+    {
+        id: 72,
+        sku: "JDP-072",
+        nombre: "Posapiés universal pasajero",
+        categoria: "Accesorios",
+        marca_repuesto: "Universal",
+        precio: 0,
+        stock: "Disponible",
+        compatibilidad: "Todos modelos",
+        icono: "fa-shoe-prints",
+        codigo: "N/A",
+        cantidad: 4
+    },
+    {
+        id: 73,
+        sku: "JDP-073",
+        nombre: "Válvulas escape/admisión Yamaha XT",
+        categoria: "Repuestos Motor",
+        marca_repuesto: "Yamaha",
+        precio: 0,
+        stock: "Últimas unidades",
+        compatibilidad: "XT 225 (2002-2009)",
+        icono: "fa-tint",
+        codigo: "N/A",
+        cantidad: 1
+    },
+    {
+        id: 74,
+        sku: "JDP-074",
+        nombre: "Válvulas escape CRF",
+        categoria: "Repuestos Motor",
+        marca_repuesto: "Honda",
+        precio: 0,
+        stock: "Últimas unidades",
+        compatibilidad: "CRF 250 (2004-2014)",
+        icono: "fa-tint",
+        codigo: "N/A",
+        cantidad: 1
+    },
+    {
+        id: 75,
+        sku: "JDP-075",
+        nombre: "Válvulas admisión CRF",
+        categoria: "Repuestos Motor",
+        marca_repuesto: "Honda",
+        precio: 0,
+        stock: "Últimas unidades",
+        compatibilidad: "CRF 450 (2006)",
+        icono: "fa-tint",
+        codigo: "N/A",
+        cantidad: 1
+    },
+    {
+        id: 76,
+        sku: "JDP-076",
+        nombre: "Forros de asiento universal",
+        categoria: "Accesorios",
+        marca_repuesto: "Universal",
+        precio: 0,
+        stock: "Disponible",
+        compatibilidad: "Todos modelos",
+        icono: "fa-chair",
+        codigo: "N/A",
+        cantidad: 13
+    },
+    {
+        id: 77,
+        sku: "JDP-077",
+        nombre: "Kit reparación horquilla trasera Yamaha",
+        categoria: "Motocross",
+        marca_repuesto: "Yamaha",
+        precio: 0,
+        stock: "Últimas unidades",
+        compatibilidad: "250/450",
+        icono: "fa-wrench",
+        codigo: "N/A",
+        cantidad: 1
+    },
+    {
+        id: 78,
+        sku: "JDP-078",
+        nombre: "Kit reparación horquilla trasera Honda",
+        categoria: "Motocross",
+        marca_repuesto: "Honda",
+        precio: 0,
+        stock: "Últimas unidades",
+        compatibilidad: "250/450",
+        icono: "fa-wrench",
+        codigo: "N/A",
+        cantidad: 1
+    },
+    {
+        id: 79,
+        sku: "JDP-079",
+        nombre: "Triángulo de suspensión",
+        categoria: "Motocross",
+        marca_repuesto: "Universal",
+        precio: 0,
+        stock: "Últimas unidades",
+        compatibilidad: "Todos modelos",
+        icono: "fa-caret-up",
+        codigo: "N/A",
+        cantidad: 1
+    },
+    {
+        id: 80,
+        sku: "JDP-080",
+        nombre: "Guía cadena de tiempo motor XR",
+        categoria: "Repuestos Motor",
+        marca_repuesto: "Honda",
+        precio: 0,
+        stock: "Disponible",
+        compatibilidad: "XR 250 (1996-2004)",
+        icono: "fa-link",
+        codigo: "N/A",
+        cantidad: 4
+    },
+    {
+        id: 81,
+        sku: "JDP-081",
+        nombre: "Sujetador manguera freno WR/YZ",
+        categoria: "Motocross",
+        marca_repuesto: "Yamaha",
+        precio: 0,
+        stock: "Últimas unidades",
+        compatibilidad: "WR, YZ",
+        icono: "fa-grip-lines",
+        codigo: "N/A",
+        cantidad: 1
+    },
+    {
+        id: 82,
+        sku: "JDP-082",
+        nombre: "Protector caliper trasero Yamaha",
+        categoria: "Motocross",
+        marca_repuesto: "Yamaha",
+        precio: 0,
+        stock: "Disponible",
+        compatibilidad: "WR, YZ (2007-2018) Negro/Plateado",
+        icono: "fa-shield-alt",
+        codigo: "N/A",
+        cantidad: 2
+    },
+    {
+        id: 83,
+        sku: "JDP-083",
+        nombre: "Bendix cremallera arranque Yamaha",
+        categoria: "Repuestos Motor",
+        marca_repuesto: "Yamaha",
+        precio: 0,
+        stock: "Últimas unidades",
+        compatibilidad: "250",
+        icono: "fa-cog",
+        codigo: "N/A",
+        cantidad: 1
+    },
+    {
+        id: 84,
+        sku: "JDP-084",
+        nombre: "Tapa radiador Honda/Yamaha/Suzuki",
+        categoria: "Repuestos Motor",
+        marca_repuesto: "Universal",
+        precio: 0,
+        stock: "Últimas unidades",
+        compatibilidad: "Varios modelos",
+        icono: "fa-temperature-high",
+        codigo: "N/A",
+        cantidad: 1
+    },
+    {
+        id: 85,
+        sku: "JDP-085",
+        nombre: "Kit sellos tanque gasolina",
+        categoria: "Repuestos Motor",
+        marca_repuesto: "Universal",
+        precio: 0,
+        stock: "Disponible",
+        compatibilidad: "Todos modelos",
+        icono: "fa-gas-pump",
+        codigo: "N/A",
+        cantidad: 3
+    },
+    {
+        id: 86,
+        sku: "JDP-086",
+        nombre: "Cadena de tiempo Yamaha WR250",
+        categoria: "Repuestos Motor",
+        marca_repuesto: "Yamaha",
+        precio: 0,
+        stock: "Disponible",
+        compatibilidad: "WR250 / YZ 250",
+        icono: "fa-link",
+        codigo: "3114/27524",
+        cantidad: 3
+    },
+    {
+        id: 87,
+        sku: "JDP-087",
+        nombre: "Resorte pata Yamaha WR/YZ",
+        categoria: "Motocross",
+        marca_repuesto: "Yamaha",
+        precio: 0,
+        stock: "Últimas unidades",
+        compatibilidad: "WR, YZ 250",
+        icono: "fa-compress-arrows-alt",
+        codigo: "0743",
+        cantidad: 1
+    },
+    {
+        id: 88,
+        sku: "JDP-088",
+        nombre: "Juego gorros válvula Yamaha WR 450",
+        categoria: "Repuestos Motor",
+        marca_repuesto: "Yamaha",
+        precio: 0,
+        stock: "Últimas unidades",
+        compatibilidad: "WR 450",
+        icono: "fa-circle",
+        codigo: "N/A",
+        cantidad: 1
+    },
+    {
+        id: 89,
+        sku: "JDP-089",
+        nombre: "Juego gorros válvula Yamaha WR 250",
+        categoria: "Repuestos Motor",
+        marca_repuesto: "Yamaha",
+        precio: 0,
+        stock: "Últimas unidades",
+        compatibilidad: "WR 250",
+        icono: "fa-circle",
+        codigo: "N/A",
+        cantidad: 1
+    },
+    {
+        id: 90,
+        sku: "JDP-090",
+        nombre: "Rodillera marca Cuissard",
+        categoria: "Vestimenta",
+        marca_repuesto: "Cuissard",
+        precio: 0,
+        stock: "Últimas unidades",
+        compatibilidad: "Universal (Negro)",
+        icono: "fa-shield-alt",
+        codigo: "N/A",
+        cantidad: 1
+    },
+    {
+        id: 91,
+        sku: "JDP-091",
+        nombre: "Tope de pata KTM/Husqvarna",
+        categoria: "Accesorios",
+        marca_repuesto: "KTM / Husqvarna",
+        precio: 0,
+        stock: "Disponible",
+        compatibilidad: "250-450 (Negro, Azul)",
+        icono: "fa-shoe-prints",
+        codigo: "N/A",
+        cantidad: 3
+    },
+    {
+        id: 92,
+        sku: "JDP-092",
+        nombre: "Posapiés universal moto chopper",
+        categoria: "Accesorios",
+        marca_repuesto: "Universal",
+        precio: 0,
+        stock: "Últimas unidades",
+        compatibilidad: "Chopper",
+        icono: "fa-shoe-prints",
+        codigo: "N/A",
+        cantidad: 1
+    },
+    {
+        id: 93,
+        sku: "JDP-093",
+        nombre: "Abrazadera freno manguera trasera RMZ",
+        categoria: "Motocross",
+        marca_repuesto: "Suzuki",
+        precio: 0,
+        stock: "Últimas unidades",
+        compatibilidad: "RMZ",
+        icono: "fa-grip-lines",
+        codigo: "N/A",
+        cantidad: 1
+    },
+    {
+        id: 94,
+        sku: "JDP-094",
+        nombre: "Punta pata freno trasera KTM",
+        categoria: "Motocross",
+        marca_repuesto: "KTM",
+        precio: 0,
+        stock: "Disponible",
+        compatibilidad: "Universal",
+        icono: "fa-shoe-prints",
+        codigo: "N/A",
+        cantidad: 2
+    },
+    {
+        id: 95,
+        sku: "JDP-095",
+        nombre: "Tapa válvulas XR600 Honda",
+        categoria: "Repuestos Motor",
+        marca_repuesto: "Honda",
+        precio: 0,
+        stock: "Últimas unidades",
+        compatibilidad: "XR 600",
+        icono: "fa-circle",
+        codigo: "N/A",
+        cantidad: 1
+    },
+    {
+        id: 96,
+        sku: "JDP-096",
+        nombre: "Taco de goma descanso",
+        categoria: "Accesorios",
+        marca_repuesto: "Universal",
+        precio: 0,
+        stock: "Disponible",
+        compatibilidad: "Todos modelos",
+        icono: "fa-cube",
+        codigo: "LT01",
+        cantidad: 4
+    },
+    {
+        id: 97,
+        sku: "JDP-097",
+        nombre: "Carter completo Yamaha YZ",
+        categoria: "Repuestos Motor",
+        marca_repuesto: "Yamaha",
+        precio: 0,
+        stock: "Disponible",
+        compatibilidad: "YZ 250 (2006-2007)",
+        icono: "fa-oil-can",
+        codigo: "5NL174111000",
+        cantidad: 1
+    },
+    {
+        id: 98,
+        sku: "JDP-098",
+        nombre: "Guantes motocross Fast House",
+        categoria: "Vestimenta",
+        marca_repuesto: "Fast House",
+        precio: 0,
+        stock: "Disponible",
+        compatibilidad: "Tallas L, XL",
+        icono: "fa-hand-paper",
+        codigo: "N/A",
+        cantidad: 5
+    },
+    {
+        id: 99,
+        sku: "JDP-099",
+        nombre: "Lentes marca 100%",
+        categoria: "Vestimenta",
+        marca_repuesto: "100%",
+        precio: 0,
+        stock: "Disponible",
+        compatibilidad: "Universal",
+        icono: "fa-glasses",
+        codigo: "7528",
+        cantidad: 6
+    },
+    {
+        id: 100,
+        sku: "JDP-100",
+        nombre: "Tapa aceite Pigue 50",
+        categoria: "Repuestos Motor",
+        marca_repuesto: "Pigue",
+        precio: 0,
+        stock: "Últimas unidades",
+        compatibilidad: "50",
+        icono: "fa-oil-can",
+        codigo: "N/A",
+        cantidad: 1
+    },
+    {
+        id: 101,
+        sku: "JDP-101",
+        nombre: "Corona volante Renthal dorada",
+        categoria: "Motocross",
+        marca_repuesto: "Renthal",
+        precio: 0,
+        stock: "Disponible",
+        compatibilidad: "Universal",
+        icono: "fa-circle-notch",
+        codigo: "N/A",
+        cantidad: 1
+    },
+    {
+        id: 102,
+        sku: "JDP-102",
+        nombre: "Corona volante Renthal cuadrada",
+        categoria: "Motocross",
+        marca_repuesto: "Renthal",
+        precio: 0,
+        stock: "Disponible",
+        compatibilidad: "Universal",
+        icono: "fa-square",
+        codigo: "N/A",
+        cantidad: 1
+    },
+    {
+        id: 103,
+        sku: "JDP-103",
+        nombre: "Rodillera marca Vemar articulada",
+        categoria: "Vestimenta",
+        marca_repuesto: "Vemar",
+        precio: 0,
+        stock: "Últimas unidades",
+        compatibilidad: "Universal",
+        icono: "fa-shield-alt",
+        codigo: "N/A",
+        cantidad: 1
+    },
+    {
+        id: 104,
+        sku: "JDP-104",
+        nombre: "Casco marca LS2",
+        categoria: "Vestimenta",
+        marca_repuesto: "LS2",
+        precio: 0,
+        stock: "Últimas unidades",
+        compatibilidad: "Talla XS (53-54cm)",
+        icono: "fa-helmet-safety",
+        codigo: "N/A",
+        cantidad: 1
+    },
+    {
+        id: 105,
+        sku: "JDP-105",
+        nombre: "Protector radiador KTM Moose Racing",
+        categoria: "Motocross",
+        marca_repuesto: "Moose Racing",
+        precio: 0,
+        stock: "Últimas unidades",
+        compatibilidad: "KTM",
+        icono: "fa-shield-alt",
+        codigo: "N/A",
+        cantidad: 1
+    },
+    {
+        id: 106,
+        sku: "JDP-106",
+        nombre: "Abrazadera freno delantero CRF",
+        categoria: "Motocross",
+        marca_repuesto: "Honda",
+        precio: 0,
+        stock: "Últimas unidades",
+        compatibilidad: "CRF 450",
+        icono: "fa-grip-lines",
+        codigo: "N/A",
+        cantidad: 1
+    },
+    {
+        id: 107,
+        sku: "JDP-107",
+        nombre: "Radios llanta Yamaha",
+        categoria: "Motocross",
+        marca_repuesto: "Yamaha",
+        precio: 0,
+        stock: "Disponible",
+        compatibilidad: "250/450 Rin 21",
+        icono: "fa-circle",
+        codigo: "N/A",
+        cantidad: 36
+    },
+    {
+        id: 108,
+        sku: "JDP-108",
+        nombre: "Piñones cadena arrastre WR/YZ",
+        categoria: "Motocross",
+        marca_repuesto: "Yamaha",
+        precio: 0,
+        stock: "Disponible",
+        compatibilidad: "WR, YZ 250/450 (2001-2021)",
+        icono: "fa-cog",
+        codigo: "N/A",
+        cantidad: 3
+    },
+    {
+        id: 109,
+        sku: "JDP-109",
+        nombre: "Piñones cadena arrastre Honda CRF",
+        categoria: "Motocross",
+        marca_repuesto: "Honda",
+        precio: 0,
+        stock: "Disponible",
+        compatibilidad: "CRF 250 (2014-2017)",
+        icono: "fa-cog",
+        codigo: "N/A",
+        cantidad: 2
+    },
+    {
+        id: 110,
+        sku: "JDP-110",
+        nombre: "Piñones cadena arrastre KTM",
+        categoria: "Motocross",
+        marca_repuesto: "KTM",
+        precio: 0,
+        stock: "Disponible",
+        compatibilidad: "13 dientes",
+        icono: "fa-cog",
+        codigo: "N/A",
+        cantidad: 2
+    },
+    {
+        id: 111,
+        sku: "JDP-111",
+        nombre: "Combo pack color verde",
+        categoria: "Accesorios",
+        marca_repuesto: "Universal",
+        precio: 0,
+        stock: "Disponible",
+        compatibilidad: "Todos modelos",
+        icono: "fa-box-open",
+        codigo: "N/A",
+        cantidad: 2
+    },
+    {
+        id: 112,
+        sku: "JDP-112",
+        nombre: "Licras deportivas motocross",
+        categoria: "Vestimenta",
+        marca_repuesto: "Universal",
+        precio: 0,
+        stock: "Disponible",
+        compatibilidad: "Talla XL (Negro, Morado)",
+        icono: "fa-tshirt",
+        codigo: "N/A",
+        cantidad: 3
+    },
+    {
+        id: 113,
+        sku: "JDP-113",
+        nombre: "Mono Thor",
+        categoria: "Vestimenta",
+        marca_repuesto: "Thor",
+        precio: 0,
+        stock: "Últimas unidades",
+        compatibilidad: "Talla 32 Verde Fluorescente",
+        icono: "fa-user-astronaut",
+        codigo: "N/A",
+        cantidad: 1
+    },
+    {
+        id: 114,
+        sku: "JDP-114",
+        nombre: "Guardabarro delantero UFO blanco",
+        categoria: "Accesorios",
+        marca_repuesto: "UFO",
+        precio: 0,
+        stock: "Últimas unidades",
+        compatibilidad: "WR, YZ 250/450 (2015)",
+        icono: "fa-shield-alt",
+        codigo: "N/A",
+        cantidad: 1
+    },
+    {
+        id: 115,
+        sku: "JDP-115",
+        nombre: "Filtro aceite Yamaha YZ/WR",
+        categoria: "Repuestos Motor",
+        marca_repuesto: "Yamaha",
+        precio: 0,
+        stock: "Disponible",
+        compatibilidad: "YZ, WR 250/450",
+        icono: "fa-filter",
+        codigo: "N/A",
+        cantidad: 5
+    },
+    {
+        id: 116,
+        sku: "JDP-116",
+        nombre: "Filtro aceite Honda CRF",
+        categoria: "Repuestos Motor",
+        marca_repuesto: "Honda",
+        precio: 0,
+        stock: "Últimas unidades",
+        compatibilidad: "CRF 250/450",
+        icono: "fa-filter",
+        codigo: "N/A",
+        cantidad: 1
+    },
+    {
+        id: 117,
+        sku: "JDP-117",
+        nombre: "Bendix de arranque CR",
+        categoria: "Repuestos Motor",
+        marca_repuesto: "Honda",
+        precio: 0,
+        stock: "Últimas unidades",
+        compatibilidad: "CR 250/450",
+        icono: "fa-bolt",
+        codigo: "N/A",
+        cantidad: 1
+    },
+    {
+        id: 118,
+        sku: "JDP-118",
+        nombre: "Kit carburador",
+        categoria: "Repuestos Motor",
+        marca_repuesto: "Universal",
+        precio: 0,
+        stock: "Disponible",
+        compatibilidad: "Todos modelos",
+        icono: "fa-wrench",
+        codigo: "4784",
+        cantidad: 4
+    },
+    {
+        id: 119,
+        sku: "JDP-119",
+        nombre: "Cochinillo de arranque",
+        categoria: "Repuestos Motor",
+        marca_repuesto: "Yamaha",
+        precio: 0,
+        stock: "Disponible",
+        compatibilidad: "WR 250/450",
+        icono: "fa-cog",
+        codigo: "N/A",
+        cantidad: 1
+    },
+];
+
+
+let currentPage = 1;
+const itemsPerPage = 12;
+let filteredProducts = [...products];
+let currentFilter = 'all';
+
+function getStockBadge(stock) {
+    if (stock === 'Disponible') return '<span class="product-badge badge-stock"><i class="fas fa-check"></i> Stock</span>';
+    if (stock === 'Últimas unidades') return '<span class="product-badge badge-limited"><i class="fas fa-exclamation"></i> Últimas unidades</span>';
+    return '<span class="product-badge badge-order"><i class="fas fa-clock"></i> En pedido</span>';
+}
+
+function formatPrice(price) {
+    return price > 0 ? '$' + price.toLocaleString('es-VE') : 'Consultar precio';
+}
+
+function renderProducts() {
+    const grid = document.getElementById('productsGrid');
+    const start = (currentPage - 1) * itemsPerPage;
+    const end = start + itemsPerPage;
+    const pageProducts = filteredProducts.slice(start, end);
+
+    if (pageProducts.length === 0) {
+        grid.innerHTML = '<div style="grid-column: 1/-1; text-align: center; padding: 60px; color: var(--blanco-suave);"><i class="fas fa-search" style="font-size: 3rem; color: var(--naranja); margin-bottom: 20px;"></i><h3>No se encontraron productos</h3><p>Intenta con otros términos de búsqueda</p></div>';
+        document.getElementById('pagination').innerHTML = '';
+        return;
+    }
+
+    let html = '';
+    pageProducts.forEach((p, index) => {
+        html += '<div class="product-card" style="animation-delay: ' + (index * 0.05) + 's">';
+        html += getStockBadge(p.stock);
+        html += '<div class="product-image"><i class="fas ' + p.icono + '"></i></div>';
+        html += '<div class="product-info">';
+        html += '<div class="product-sku">' + p.sku + '</div>';
+        html += '<div class="product-name">' + p.nombre + '</div>';
+        html += '<div class="product-brand"><i class="fas fa-industry"></i> ' + p.marca_repuesto + '</div>';
+
+        if (p.categoria !== 'Vestimenta') {
+            html += '<div class="product-compat"><div class="compat-title"><i class="fas fa-motorcycle"></i> Compatible con:</div><div class="compat-list">' + p.compatibilidad + '</div></div>';
+        } else {
+            html += '<div class="product-compat"><div class="compat-title"><i class="fas fa-info-circle"></i> Información:</div><div class="compat-list">' + p.compatibilidad + '</div></div>';
+        }
+
+        html += '<div class="product-footer">';
+        html += '<div class="product-price">';
+        if (p.precio > 0) {
+            html += '<span class="currency">USD</span> ' + formatPrice(p.precio);
+        } else {
+            html += formatPrice(p.precio);
+        }
+        html += '</div>';
+        html += '<div class="product-actions">';
+        html += '<button class="btn-icon btn-details" onclick="openModal(' + p.id + ')" title="Ver detalles"><i class="fas fa-eye"></i></button>';
+        html += '<a href="https://wa.me/584128445708?text=Hola JDP Racing! Me interesa el producto ' + encodeURIComponent(p.nombre) + ' (' + p.sku + '). ¿Está disponible?" class="btn-icon btn-whatsapp" target="_blank" title="Consultar por WhatsApp"><i class="fab fa-whatsapp"></i></a>';
+        html += '</div></div></div></div>';
+    });
+
+    grid.innerHTML = html;
+    renderPagination();
+}
+
+function renderPagination() {
+    const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
+    const pagination = document.getElementById('pagination');
+
+    if (totalPages <= 1) { pagination.innerHTML = ''; return; }
+
+    let html = `<button class="page-btn" onclick="changePage(${currentPage - 1})" ${currentPage === 1 ? 'disabled' : ''}><i class="fas fa-chevron-left"></i></button>`;
+
+    for (let i = 1; i <= totalPages; i++) {
+        if (i === 1 || i === totalPages || (i >= currentPage - 1 && i <= currentPage + 1)) {
+            html += `<button class="page-btn ${i === currentPage ? 'active' : ''}" onclick="changePage(${i})">${i}</button>`;
+        } else if (i === currentPage - 2 || i === currentPage + 2) {
+            html += `<span style="color: var(--blanco-suave); padding: 10px;">...</span>`;
+        }
+    }
+
+    html += `<button class="page-btn" onclick="changePage(${currentPage + 1})" ${currentPage === totalPages ? 'disabled' : ''}><i class="fas fa-chevron-right"></i></button>`;
+    pagination.innerHTML = html;
+}
+
+function changePage(page) {
+    currentPage = page;
+    renderProducts();
+    document.querySelector('.products-section').scrollIntoView({ behavior: 'smooth' });
+}
+
+function filterProducts(category) {
+    currentFilter = category;
+    currentPage = 1;
+    document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.toggle('active', btn.dataset.filter === category));
+    // Limpiar búsqueda al cambiar de categoría
+    document.getElementById('searchInput').value = '';
+    document.getElementById('searchSuggestions').classList.remove('active');
+    filteredProducts = category === 'all' ? [...products] : products.filter(p => p.categoria === category);
+    renderProducts();
+}
+
+function applySearch() {
+    const searchTerm = document.getElementById('searchInput').value.toLowerCase().trim();
+
+    // Empezar desde el filtro de categoría actual
+    let baseProducts = currentFilter === 'all' ? [...products] : products.filter(p => p.categoria === currentFilter);
+
+    if (searchTerm) {
+        const terms = searchTerm.split(/\s+/).filter(t => t.length > 0);
+
+        filteredProducts = baseProducts.filter(p => {
+            const nombre = p.nombre.toLowerCase();
+            const sku = p.sku.toLowerCase();
+            const marca = p.marca_repuesto.toLowerCase();
+            const compat = p.compatibilidad.toLowerCase();
+            const categoria = p.categoria.toLowerCase();
+            const codigo = (p.codigo || '').toLowerCase();
+
+            return terms.every(term => 
+                nombre.includes(term) ||
+                sku.includes(term) ||
+                marca.includes(term) ||
+                compat.includes(term) ||
+                categoria.includes(term) ||
+                codigo.includes(term)
+            );
+        });
+    } else {
+        filteredProducts = baseProducts;
+    }
+    currentPage = 1;
+    renderProducts();
+}
+
+// Función de autocompletado
+function showSuggestions(searchTerm) {
+    const suggestionsBox = document.getElementById('searchSuggestions');
+
+    if (!searchTerm || searchTerm.length < 2) {
+        suggestionsBox.classList.remove('active');
+        return;
+    }
+
+    const term = searchTerm.toLowerCase().trim();
+    const terms = term.split(/\s+/).filter(t => t.length > 0);
+
+    if (terms.length === 0) {
+        suggestionsBox.classList.remove('active');
+        return;
+    }
+
+    let matches = products.filter(p => {
+        const nombre = p.nombre.toLowerCase();
+        const sku = p.sku.toLowerCase();
+        const marca = p.marca_repuesto.toLowerCase();
+        const compat = p.compatibilidad.toLowerCase();
+        const categoria = p.categoria.toLowerCase();
+        const codigo = (p.codigo || '').toLowerCase();
+
+        return terms.every(t => 
+            nombre.includes(t) || sku.includes(t) || marca.includes(t) || 
+            compat.includes(t) || categoria.includes(t) || codigo.includes(t)
+        );
+    }).slice(0, 8);
+
+    suggestionsBox.innerHTML = '';
+
+    if (matches.length === 0) {
+        const noResults = document.createElement('div');
+        noResults.className = 'suggestion-no-results';
+        noResults.innerHTML = '<i class="fas fa-search"></i>No se encontraron coincidencias';
+        suggestionsBox.appendChild(noResults);
+    } else {
+        matches.forEach(p => {
+            const item = document.createElement('div');
+            item.className = 'suggestion-item';
+            item.onclick = function() { selectSuggestion(p.id); };
+
+            const icon = document.createElement('i');
+            icon.className = 'fas ' + p.icono;
+            item.appendChild(icon);
+
+            const textDiv = document.createElement('div');
+            textDiv.className = 'suggestion-text';
+
+            const nameDiv = document.createElement('div');
+            nameDiv.className = 'suggestion-name';
+            highlightText(nameDiv, p.nombre, terms);
+            textDiv.appendChild(nameDiv);
+
+            const metaDiv = document.createElement('div');
+            metaDiv.className = 'suggestion-meta';
+            highlightText(metaDiv, p.marca_repuesto + ' · ' + p.compatibilidad, terms);
+            textDiv.appendChild(metaDiv);
+
+            item.appendChild(textDiv);
+
+            const skuSpan = document.createElement('span');
+            skuSpan.className = 'suggestion-sku';
+            skuSpan.textContent = p.sku;
+            item.appendChild(skuSpan);
+
+            suggestionsBox.appendChild(item);
+        });
+    }
+
+    suggestionsBox.classList.add('active');
+}
+
+function highlightText(element, text, terms) {
+    element.innerHTML = '';
+    let occurrences = [];
+    terms.forEach(t => {
+        if (t.length === 0) return;
+        const regex = new RegExp(t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi');
+        let match;
+        while ((match = regex.exec(text)) !== null) {
+            occurrences.push({ start: match.index, end: match.index + match[0].length, text: match[0] });
+        }
+    });
+
+    occurrences.sort((a, b) => a.start - b.start);
+    let filtered = [];
+    occurrences.forEach(occ => {
+        if (filtered.length === 0 || occ.start >= filtered[filtered.length - 1].end) {
+            filtered.push(occ);
+        }
+    });
+
+    let lastEnd = 0;
+    filtered.forEach(occ => {
+        if (occ.start > lastEnd) {
+            element.appendChild(document.createTextNode(text.substring(lastEnd, occ.start)));
+        }
+        const highlightSpan = document.createElement('span');
+        highlightSpan.className = 'suggestion-highlight';
+        highlightSpan.textContent = occ.text;
+        element.appendChild(highlightSpan);
+        lastEnd = occ.end;
+    });
+    if (lastEnd < text.length) {
+        element.appendChild(document.createTextNode(text.substring(lastEnd)));
+    }
+}
+
+function selectSuggestion(productId) {
+    const p = products.find(prod => prod.id === productId);
+    if (p) {
+        document.getElementById('searchInput').value = p.nombre;
+        document.getElementById('searchSuggestions').classList.remove('active');
+        // Filtrar para mostrar solo ese producto
+        filteredProducts = [p];
+        currentPage = 1;
+        renderProducts();
+    }
+}
+
+function hideSuggestions() {
+    setTimeout(() => {
+        document.getElementById('searchSuggestions').classList.remove('active');
+    }, 200);
+}
+
+function sortProducts() {
+    const sortValue = document.getElementById('sortSelect').value;
+    if (sortValue === 'price-asc') filteredProducts.sort((a, b) => a.precio - b.precio);
+    else if (sortValue === 'price-desc') filteredProducts.sort((a, b) => b.precio - a.precio);
+    else if (sortValue === 'name') filteredProducts.sort((a, b) => a.nombre.localeCompare(b.nombre));
+    currentPage = 1;
+    renderProducts();
+}
+
+function openModal(productId) {
+    const p = products.find(prod => prod.id === productId);
+    if (!p) return;
+
+    const stockColor = p.stock === 'Disponible' ? 'var(--verde)' : p.stock === 'Últimas unidades' ? 'var(--naranja)' : 'var(--rojo)';
+
+    let html = '';
+    html += '<div class="modal-image"><i class="fas ' + p.icono + '"></i></div>';
+    html += '<div class="modal-sku">' + p.sku + '</div>';
+    html += '<div class="modal-title">' + p.nombre + '</div>';
+    html += '<div class="modal-details">';
+    html += '<div class="detail-item"><div class="detail-label">Marca</div><div class="detail-value">' + p.marca_repuesto + '</div></div>';
+    html += '<div class="detail-item"><div class="detail-label">Categoría</div><div class="detail-value">' + p.categoria + '</div></div>';
+    html += '<div class="detail-item"><div class="detail-label">Stock</div><div class="detail-value" style="color: ' + stockColor + '">' + p.stock + '</div></div>';
+    html += '<div class="detail-item"><div class="detail-label">Estado</div><div class="detail-value">Nuevo / Original</div></div>';
+    html += '</div>';
+    html += '<div class="detail-item" style="margin-bottom: 20px;">';
+    if (p.categoria === 'Vestimenta') {
+        html += '<div class="detail-label"><i class="fas fa-tshirt"></i> Detalles</div>';
+    } else {
+        html += '<div class="detail-label"><i class="fas fa-motorcycle"></i> Compatibilidad</div>';
+    }
+    html += '<div class="detail-value">' + p.compatibilidad + '</div></div>';
+    html += '<div class="modal-price">';
+    if (p.precio > 0) {
+        html += formatPrice(p.precio) + ' <span style="font-size: 1rem; color: var(--blanco-suave);">USD</span>';
+    } else {
+        html += formatPrice(p.precio);
+    }
+    html += '</div>';
+    html += '<div class="modal-actions">';
+
+    // Construir mensaje de WhatsApp sin comillas conflictivas
+    let waMsg = 'Hola JDP Racing! Me interesa comprar el producto ' + encodeURIComponent(p.nombre) + ' (' + p.sku + ').';
+    if (p.precio > 0) {
+        waMsg += ' Precio: ' + formatPrice(p.precio) + '.';
+    }
+    waMsg += ' ¿Confirmas stock?';
+
+    html += '<a href="https://wa.me/584128445708?text=' + encodeURIComponent(waMsg) + '" class="btn-primary btn-whatsapp-lg" target="_blank"><i class="fab fa-whatsapp"></i> Consultar por WhatsApp</a>';
+    html += '<button class="btn-primary btn-secondary" onclick="closeModal()"><i class="fas fa-times"></i> Cerrar</button>';
+    html += '</div>';
+
+    document.getElementById('modalBody').innerHTML = html;
+    document.getElementById('productModal').classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+function closeModal() {
+    document.getElementById('productModal').classList.remove('active');
+    document.body.style.overflow = 'auto';
+}
+
+// Event Listeners
+document.querySelectorAll('.filter-btn').forEach(btn => btn.addEventListener('click', () => filterProducts(btn.dataset.filter)));
+document.getElementById('searchInput').addEventListener('input', (e) => { 
+    showSuggestions(e.target.value);
+    applySearch(); 
+});
+document.getElementById('searchInput').addEventListener('focus', (e) => {
+    showSuggestions(e.target.value);
+});
+// blur removido - se maneja via click fuera del search-box
+// Cerrar sugerencias al hacer click fuera
+document.addEventListener('click', (e) => {
+    if (!e.target.closest('.search-box')) {
+        document.getElementById('searchSuggestions').classList.remove('active');
+    }
+});
+document.getElementById('sortSelect').addEventListener('change', sortProducts);
+document.getElementById('productModal').addEventListener('click', (e) => { if (e.target === document.getElementById('productModal')) closeModal(); });
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+
+// Initialize
+renderProducts();
+</script>
+
+</body>
+</html>
